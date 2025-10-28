@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="manifest" href="manifest.json">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Savor Nusantara</title>
+<link rel="manifest" href="manifest.json">
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<style>
+  body { background: #f9fafb; }
+  .card { transition: 0.2s; }
+  .card:hover { transform: scale(1.03); }
+</style>
+</head>
+<body class="p-4">
+  <h1 class="text-2xl font-bold text-center mb-4">🍛 Savor Nusantara Menu</h1>
+
+  <div id="productList" class="grid grid-cols-2 gap-4"></div>
+
+  <div class="fixed bottom-0 left-0 w-full bg-white p-4 shadow-lg">
+    <div class="flex justify-between">
+      <span class="font-bold">🛒 Cart Total: RM <span id="total">0.00</span></span>
+      <button onclick="checkout()" class="bg-yellow-600 text-white px-4 py-2 rounded-lg">Checkout</button>
+    </div>
+  </div>
+
+<script>
+const products = [
+  {id: 'P001', name: 'Nasi Lemak', price: 5.00},
+  {id: 'P002', name: 'Mee Goreng', price: 6.00},
+  {id: 'P003', name: 'Teh Ais', price: 2.00},
+  {id: 'P004', name: 'Kopi O', price: 2.50},
+  {id: 'P005', name: 'Ayam Goreng', price: 4.00},
+  {id: 'P006', name: 'Nasi Kuning', price: 12.00},
+];
+
+let cart = [];
+
+function renderProducts() {
+  const list = document.getElementById('productList');
+  list.innerHTML = products.map(p => `
+    <div class="card bg-white p-3 rounded-xl shadow text-center">
+      <h2 class="font-semibold">${p.name}</h2>
+      <p class="text-gray-600">RM ${p.price.toFixed(2)}</p>
+      <button onclick="addToCart('${p.id}')" class="mt-2 bg-yellow-600 text-white px-3 py-1 rounded-lg">Add</button>
+    </div>
+  `).join('');
+}
+
+function addToCart(id) {
+  const product = products.find(p => p.id === id);
+  cart.push(product);
+  updateTotal();
+}
+
+function updateTotal() {
+  const total = cart.reduce((sum, p) => sum + p.price, 0);
+  document.getElementById('total').innerText = total.toFixed(2);
+}
+
+function checkout() {
+  if (cart.length === 0) {
+    alert("Cart is empty!");
+    return;
+  }
+  const name = prompt("Enter your name:");
+  if (!name) return;
+
+  const orderDetails = {
+    name,
+    items: cart.map(p => p.name).join(", "),
+    total: cart.reduce((sum, p) => sum + p.price, 0).toFixed(2),
+    date: new Date().toLocaleString()
+  };
+
+  alert(`Thank you, ${name}! Your order has been placed.\n\nOrder: ${orderDetails.items}\nTotal: RM ${orderDetails.total}`);
+
+  localStorage.setItem('lastOrder', JSON.stringify(orderDetails));
+  cart = [];
+  updateTotal();
+}
+
+renderProducts();
+</script>
+</body>
+</html>
