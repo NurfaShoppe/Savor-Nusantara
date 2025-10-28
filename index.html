@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Ordering System</title>
+<title>Savor Nusantara</title>
 <link rel="manifest" href="manifest.json">
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 <style>
@@ -11,17 +11,16 @@
   .card { transition: 0.2s; }
   .card:hover { transform: scale(1.03); }
 </style>
-  <link rel="manifest" href="manifest.json">
 </head>
 <body class="p-4">
-  <h1 class="text-2xl font-bold text-center mb-4">🛍️ Order Menu</h1>
+  <h1 class="text-2xl font-bold text-center mb-4">🍛 Savor Nusantara Menu</h1>
 
   <div id="productList" class="grid grid-cols-2 gap-4"></div>
 
   <div class="fixed bottom-0 left-0 w-full bg-white p-4 shadow-lg">
     <div class="flex justify-between">
       <span class="font-bold">🛒 Cart Total: RM <span id="total">0.00</span></span>
-      <button onclick="checkout()" class="bg-green-600 text-white px-4 py-2 rounded-lg">Checkout</button>
+      <button onclick="checkout()" class="bg-yellow-600 text-white px-4 py-2 rounded-lg">Checkout</button>
     </div>
   </div>
 
@@ -32,6 +31,7 @@ const products = [
   {id: 'P003', name: 'Teh Ais', price: 2.00},
   {id: 'P004', name: 'Kopi O', price: 2.50},
   {id: 'P005', name: 'Ayam Goreng', price: 4.00},
+  {id: 'P006', name: 'Nasi Kuning', price: 12.00}, 
 ];
 
 let cart = [];
@@ -42,7 +42,7 @@ function renderProducts() {
     <div class="card bg-white p-3 rounded-xl shadow text-center">
       <h2 class="font-semibold">${p.name}</h2>
       <p class="text-gray-600">RM ${p.price.toFixed(2)}</p>
-      <button onclick="addToCart('${p.id}')" class="mt-2 bg-blue-500 text-white px-3 py-1 rounded-lg">Add</button>
+      <button onclick="addToCart('${p.id}')" class="mt-2 bg-yellow-600 text-white px-3 py-1 rounded-lg">Add</button>
     </div>
   `).join('');
 }
