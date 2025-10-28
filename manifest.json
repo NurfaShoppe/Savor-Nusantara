@@ -1,10 +1,10 @@
 {
-  "name": "My Ordering System",
-  "short_name": "OrderApp",
+  "name": "Savor Nusantara",
+  "short_name": "SavorNusantara",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#2563eb",
+  "theme_color": "#d97706",
   "icons": [
     {
       "src": "icon-192.png",
